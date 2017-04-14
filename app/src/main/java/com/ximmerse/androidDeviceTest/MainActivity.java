@@ -73,21 +73,26 @@ public class MainActivity extends AppCompatActivity implements  OnClickListener 
             public void run() {
                 MainActivity.this.runOnUiThread(updateUI);
             }
-        }, 0, 5);
+        }, 0, 5);//更新ui每5毫秒
     }
 
 
     protected Runnable updateUI = new Runnable() {
         @Override
         public void run() {
-            mControllerInputLeft.updateState();
+            mControllerInputLeft.updateState();//sdk中控制器 状态更新
             mControllerInputRight.updateState();
             mHeadTrack.updateState();
-            mHeadTrack.timestamp = 1;
+            mHeadTrack.timestamp = 1;//时间戳
 
-            mTextID2.setText(String.format("{HeadTrack position=%.3f %.3f %.3f \r\n", mHeadTrack.getPositionX(2), mHeadTrack.getPositionY(2), mHeadTrack.getPositionZ(2)));
             mTextID0.setText(mControllerInputLeft.toString());
             mTextID1.setText(mControllerInputRight.toString());
+            mTextID2.setText(
+                    String.format("{HeadTrack position=%.3f %.3f %.3f \r\n"
+                            , mHeadTrack.getPositionX(2)
+                            , mHeadTrack.getPositionY(2)
+                            , mHeadTrack.getPositionZ(2)));//ui
+
         }
     };
 
